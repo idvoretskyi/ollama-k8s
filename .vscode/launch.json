@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Setup Kubernetes",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "./codespaces-setup.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Deploy Ollama (Codespaces)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "./codespaces-start.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Deploy Ollama (Standard)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "./start.sh",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Monitor Resources",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "./monitor.sh",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

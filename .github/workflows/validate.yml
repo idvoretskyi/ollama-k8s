@@ -1,0 +1,52 @@
+name: Validate Kubernetes Configs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: Kubernetes schema validation
+        run: |
+          echo "Validating Kubernetes manifest files..."
+          kubectl apply --dry-run=client -f namespace.yaml
+          kubectl apply --dry-run=client -f pvc.yaml
+          kubectl apply --dry-run=client -f deployment.yaml
+          kubectl apply --dry-run=client -f service.yaml
+          kubectl apply --dry-run=client -f webui-deployment.yaml
+          kubectl apply --dry-run=client -f webui-service.yaml
+          kubectl apply --dry-run=client -f codespaces/models-pvc.yaml
+          kubectl apply --dry-run=client -f codespaces/deployment.yaml
+          kubectl apply --dry-run=client -f codespaces/webui-deployment.yaml
+
+      - name: Validate shell scripts
+        run: |
+          echo "Checking shell scripts for syntax errors..."
+          chmod +x *.sh
+          for script in *.sh; do
+            bash -n "$script"
+          done
+
+      - name: Setup Kubernetes test cluster
+        uses: nolar/setup-k3d-k3s@v1
+        with:
+          version: latest
+
+      - name: Test deployment (no pods will actually run)
+        run: |
+          echo "Testing deployment on k3d cluster..."
+          kubectl apply -f namespace.yaml
+          kubectl apply -f pvc.yaml
+          kubectl apply -f service.yaml
+          kubectl get namespace ollama

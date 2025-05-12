@@ -11,8 +11,17 @@ fi
 
 MODEL=$1
 
+# Check if kubectl is available
+if ! command -v kubectl &> /dev/null; then
+  echo "kubectl not found. Please install kubectl and try again."
+  exit 1
+fi
+
+# Set kubectl path dynamically
+KUBECTL=$(which kubectl)
+
 # Get the pod name
-POD=$(/Users/idv/.rd/bin/kubectl get pods -n ollama -l app=ollama -o jsonpath='{.items[0].metadata.name}')
+POD=$($KUBECTL get pods -n ollama -l app=ollama -o jsonpath='{.items[0].metadata.name}')
 
 if [ -z "$POD" ]; then
   echo "No Ollama pod found. Make sure the deployment is running."
@@ -20,6 +29,6 @@ if [ -z "$POD" ]; then
 fi
 
 echo "Pulling model $MODEL on pod $POD..."
-/Users/idv/.rd/bin/kubectl exec -it -n ollama $POD -- ollama pull $MODEL
+$KUBECTL exec -it -n ollama $POD -- ollama pull $MODEL
 
 echo "Model $MODEL pulled successfully!"

@@ -12,21 +12,29 @@ Your services are available at:
 
 1. Visit the WebUI at http://172.18.0.8:8080
 2. When prompted for the API endpoint, enter: `http://ollama:11434`
-3. Pull a model using: `./pull-model.sh llama2` (or any other model)
+3. Pull a model using: `./scripts/pull-model.sh llama2` (or any other model)
 4. Start chatting with your model!
 
-## 3. Monitoring Resources
+## 3. Quick Start
+
+For a simpler experience, you can use our quick start script:
+```bash
+./scripts/quick-start.sh
+```
+
+## 5. Monitoring Resources
 
 Use the included monitoring script to keep an eye on resource usage:
 ```bash
-./monitor.sh
+./scripts/monitor.sh
 ```
 
-## 4. Available Helper Scripts
+## 6. Available Helper Scripts
 
-- `port-forward.sh`: Access services via localhost
-- `pull-model.sh`: Easily pull new models
-- `monitor.sh`: Monitor resource usage
+- `./scripts/port-forward.sh`: Access services via localhost
+- `./scripts/pull-model.sh`: Easily pull new models
+- `./scripts/monitor.sh`: Monitor resource usage
+- `./scripts/test-api.sh`: Test API connectivity
 
 ## 5. Next Steps
 

@@ -6,14 +6,18 @@ echo "========================================"
 echo "      Ollama Kubernetes Quick Start     "
 echo "========================================"
 
+# Define paths
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+MANIFESTS_DIR="$BASE_DIR/k8s/standard"
+
 # Check if kubectl is available
 if ! command -v kubectl &> /dev/null; then
     echo "kubectl not found. Please install kubectl and try again."
     exit 1
 fi
 
-# Set kubectl path
-KUBECTL="/Users/idv/.rd/bin/kubectl"
+# Set kubectl path dynamically
+KUBECTL=$(which kubectl)
 
 # Function to check if namespace exists
 check_namespace() {
@@ -24,20 +28,20 @@ check_namespace() {
 # Function to deploy everything
 deploy_all() {
     echo -e "\n[1/5] Creating namespace..."
-    $KUBECTL apply -f namespace.yaml
+    $KUBECTL apply -f "$MANIFESTS_DIR/namespace.yaml"
     
     echo -e "\n[2/5] Creating persistent volume claim..."
-    $KUBECTL apply -f pvc.yaml
+    $KUBECTL apply -f "$MANIFESTS_DIR/pvc.yaml"
     
     echo -e "\n[3/5] Deploying Ollama..."
-    $KUBECTL apply -f deployment.yaml
+    $KUBECTL apply -f "$MANIFESTS_DIR/deployment.yaml"
     
     echo -e "\n[4/5] Creating Ollama service..."
-    $KUBECTL apply -f service.yaml
+    $KUBECTL apply -f "$MANIFESTS_DIR/service.yaml"
     
     echo -e "\n[5/5] Deploying Web UI..."
-    $KUBECTL apply -f webui-deployment.yaml
-    $KUBECTL apply -f webui-service.yaml
+    $KUBECTL apply -f "$MANIFESTS_DIR/webui-deployment.yaml"
+    $KUBECTL apply -f "$MANIFESTS_DIR/webui-service.yaml"
     
     echo -e "\n✅ Deployment complete!"
 }
@@ -65,8 +69,8 @@ echo -e "\n========================================"
 echo "                Next Steps                "
 echo "========================================"
 echo "1. Wait for pods to be in 'Running' state"
-echo "2. Pull a model: ./pull-model.sh llama2"
-echo "3. Monitor resources: ./monitor.sh"
-echo "4. Access WebUI: http://$(kubectl get svc -n ollama ollama-webui -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):8080"
+echo "2. Pull a model: $BASE_DIR/scripts/pull-model.sh llama2"
+echo "3. Monitor resources: $BASE_DIR/scripts/monitor.sh"
+echo "4. Access WebUI: http://$($KUBECTL get svc -n ollama ollama-webui -o jsonpath='{.status.loadBalancer.ingress[0].ip}'):8080"
 echo "5. Set WebUI API endpoint to: http://ollama:11434"
-echo -e "\nSee GETTING-STARTED.md for more information."
+echo -e "\nSee $BASE_DIR/docs/GETTING-STARTED.md for more information."

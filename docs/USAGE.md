@@ -6,7 +6,7 @@ The simplest way to interact with models is through the WebUI:
 
 1. Access the WebUI at http://localhost:8080 (if port-forwarded) or http://<WEBUI-EXTERNAL-IP>:8080
 2. When prompted, configure the API endpoint to be http://ollama:11434 (or http://localhost:11434 if accessing from outside the cluster)
-3. Select a model (you may need to pull it first using the pull-model.sh script)
+3. Select a model (you may need to pull it first using the `./scripts/pull-model.sh` script)
 4. Start chatting!
 
 ### API Usage

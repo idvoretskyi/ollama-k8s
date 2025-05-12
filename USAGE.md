@@ -50,3 +50,15 @@ Performance will vary depending on your hardware:
 - Make sure both pods are running: `kubectl get pods -n ollama`
 - Check that the OLLAMA_API_BASE_URL environment variable is correctly set to "http://ollama:11434"
 - Check service discovery: `kubectl exec -it -n ollama <webui-pod> -- curl ollama:11434/api/version`
+
+### WebUI crashes with CrashLoopBackOff or OOMKilled
+- The WebUI may be running out of memory. Check the logs: `kubectl logs -n ollama deployment/ollama-webui`
+- If the error shows "OOMKilled" or exit code 137, increase the memory in webui-deployment.yaml:
+  ```yaml
+  resources:
+    requests:
+      memory: "512Mi"
+    limits:
+      memory: "1Gi"
+  ```
+- Apply the changes: `kubectl apply -f webui-deployment.yaml`

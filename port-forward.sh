@@ -19,14 +19,17 @@ echo "Port forwarding active. Press Ctrl+C to stop."
 # Function to cleanup port forwarding on exit
 cleanup() {
   echo "Stopping port forwarding..."
-  kill $OLLAMA_PID $WEBUI_PID
+  kill $OLLAMA_PID 2>/dev/null
+  kill $WEBUI_PID 2>/dev/null
   exit 0
 }
 
-# Set up trap to catch Ctrl+C
-trap cleanup SIGINT
+# Set up trap to catch Ctrl+C and other termination signals
+trap cleanup SIGINT SIGTERM EXIT
 
 # Keep the script running
+echo "Access WebUI at: http://localhost:8080"
+echo "Access Ollama API at: http://localhost:11434"
 while true; do
   sleep 1
 done

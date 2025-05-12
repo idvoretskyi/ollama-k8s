@@ -1,4 +1,12 @@
-# Ollama on Kubernetes
+# Ollam- **WebUI**: A web interface for interacting with Ollama models
+- **Helper Scripts**: For pulling models and port-forwarding
+
+## Prerequisites
+
+- A running Kubernetes cluster (tested on local Kubernetes with 24GB RAM)
+- kubectl installed and configured
+- At least 8GB of RAM available for running models (more for larger models)
+- About 1.5GB of RAM for the WebUI and Ollama service componentsernetes
 
 This repository contains Kubernetes manifests to deploy Ollama and Open WebUI on a Kubernetes cluster. This setup allows you to run large language models (LLMs) locally in your Kubernetes environment.
 

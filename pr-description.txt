@@ -1,0 +1,18 @@
+# Remove root directory wrapper scripts
+
+This PR removes all wrapper scripts from the root directory and updates documentation references to use scripts from the scripts/ directory directly.
+
+## Changes
+
+1. Moved `quick-start.sh` to the scripts directory
+2. Updated all documentation references to point to scripts in the scripts/ directory
+3. Updated .devcontainer/devcontainer.json to only make scripts in scripts/ executable
+4. Removed all shell scripts from the root directory
+
+## Testing Done
+
+- Verified all script paths in documentation
+- Confirmed all scripts are now in the scripts/ directory
+- Validated that tasks.json is still referring to the correct paths
+
+Signed-off-by: GitHub Copilot <copilot@github.com>

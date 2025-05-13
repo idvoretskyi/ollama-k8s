@@ -1,0 +1,59 @@
+{
+  "name": "Ollama Kubernetes Development",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+      "version": "latest",
+      "helm": "latest",
+      "minikube": "latest"
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers-contrib/features/kubectl-kustomize:1": {}
+  },
+  "forwardPorts": [8080, 11434],
+  "portsAttributes": {
+    "8080": {
+      "label": "Ollama WebUI",
+      "onAutoForward": "openPreview"
+    },
+    "11434": {
+      "label": "Ollama API"
+    }
+  },
+  "postCreateCommand": "chmod +x scripts/*.sh && echo 'alias kubectl=\"minikube kubectl --\"' >> ~/.bashrc && echo 'alias k=\"minikube kubectl --\"' >> ~/.bashrc",
+  "postAttachCommand": "./scripts/welcome.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "redhat.vscode-yaml",
+        "timonwong.shellcheck",
+        "mads-hartmann.bash-ide-vscode",
+        "streetsidesoftware.code-spell-checker",
+        "aaron-bond.better-comments",
+        "yzhang.markdown-all-in-one"
+      ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        },
+        "files.associations": {
+          "*.yaml": "yaml",
+          "Dockerfile*": "dockerfile"
+        },
+        "yaml.schemas": {
+          "kubernetes": "*.yaml"
+        }
+      }
+    }
+  },
+  "remoteUser": "vscode",
+  "hostRequirements": {
+    "memory": "8gb",
+    "cpus": 2
+  }
+}

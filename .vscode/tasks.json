@@ -1,0 +1,89 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Setup Kubernetes Cluster",
+      "type": "shell",
+      "command": "./scripts/codespaces-setup.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Deploy Ollama (Codespaces-optimized)",
+      "type": "shell",
+      "command": "./scripts/codespaces-start.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Deploy Ollama (Standard)",
+      "type": "shell",
+      "command": "./scripts/start.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Pull Phi-2 Model",
+      "type": "shell",
+      "command": "./scripts/pull-model.sh phi2",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Pull Gemma 2B Model",
+      "type": "shell",
+      "command": "./scripts/pull-model.sh gemma:2b",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Forward Ports",
+      "type": "shell",
+      "command": "./scripts/port-forward.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Monitor Resources",
+      "type": "shell",
+      "command": "./scripts/monitor.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "label": "Test Ollama API",
+      "type": "shell",
+      "command": "./scripts/test-api.sh",
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ]
+}

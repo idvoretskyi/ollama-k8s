@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "redhat.vscode-yaml",
+    "timonwong.shellcheck",
+    "mads-hartmann.bash-ide-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "aaron-bond.better-comments",
+    "yzhang.markdown-all-in-one",
+    "oderwat.indent-rainbow",
+    "davidanson.vscode-markdownlint",
+    "ms-azuretools.vscode-docker"
+  ]
+}

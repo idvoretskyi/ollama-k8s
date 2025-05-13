@@ -1,6 +1,6 @@
 {
   "name": "Ollama Kubernetes Development",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
   "features": {
     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
       "version": "latest",
@@ -8,8 +8,7 @@
       "minikube": "latest"
     },
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers-contrib/features/kubectl-kustomize:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
   "forwardPorts": [8080, 11434],
   "portsAttributes": {
@@ -21,7 +20,7 @@
       "label": "Ollama API"
     }
   },
-  "postCreateCommand": "chmod +x scripts/*.sh && echo 'alias kubectl=\"minikube kubectl --\"' >> ~/.bashrc && echo 'alias k=\"minikube kubectl --\"' >> ~/.bashrc",
+  "postCreateCommand": "set -e && chmod +x scripts/*.sh && echo 'Installing kustomize...' && curl -sL \"https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh\" | bash && sudo mv kustomize /usr/local/bin/ && echo 'Setting up kubectl aliases...' && echo 'alias kubectl=\"minikube kubectl --\"' >> ~/.bashrc && echo 'alias k=\"minikube kubectl --\"' >> ~/.bashrc && ./scripts/initialize.sh > ~/codespace-init.log 2>&1",
   "postAttachCommand": "./scripts/welcome.sh",
   "customizations": {
     "vscode": {

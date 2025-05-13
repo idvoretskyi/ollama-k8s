@@ -10,6 +10,18 @@ echo "========================================"
 echo "     Ollama Codespaces K8s Setup        "
 echo "========================================"
 
+# Check system requirements and versions
+echo "Checking system requirements..."
+OS_INFO=$(cat /etc/os-release | grep PRETTY_NAME || echo "OS Unknown")
+MEMORY=$(free -h | grep Mem | awk '{print $2}')
+CPU_COUNT=$(nproc)
+echo " - System: $OS_INFO"
+echo " - Memory: $MEMORY"
+echo " - CPU Cores: $CPU_COUNT"
+echo " - Minikube: $(minikube version --short 2>/dev/null || echo "Not installed")"
+echo " - Docker: $(docker --version 2>/dev/null || echo "Not installed")"
+echo ""
+
 # Check if running in Codespaces
 if [ -z "$CODESPACES" ]; then
   echo "Not running in GitHub Codespaces. This script is designed for Codespaces environment."
@@ -26,7 +38,7 @@ echo "Starting Minikube Kubernetes cluster..."
 minikube start --driver=docker --memory=6g --cpus=2
 
 # Set kubectl to use minikube context
-eval $(minikube -p minikube docker-env)
+eval "$(minikube -p minikube docker-env)"
 
 # Create alias for easier access
 echo "Setting up kubectl alias..."

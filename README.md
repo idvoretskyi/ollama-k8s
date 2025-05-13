@@ -8,6 +8,8 @@ This repository contains Kubernetes manifests to deploy Ollama and Open WebUI on
 
 Try it online instantly with no local setup! [See Codespaces instructions](docs/CODESPACES.md)
 
+📋 **Recent Improvements:** Check out our [project improvements summary](docs/IMPROVEMENTS.md) for details on recent enhancements.
+
 ## Directory Structure
 
 This project has been organized into a tree-based layout for improved maintainability:

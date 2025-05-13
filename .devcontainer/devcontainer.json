@@ -20,7 +20,7 @@
       "label": "Ollama API"
     }
   },
-  "postCreateCommand": "set -e && chmod +x scripts/*.sh && echo 'Installing kustomize...' && curl -sL \"https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh\" | bash && sudo mv kustomize /usr/local/bin/ && echo 'Setting up kubectl aliases...' && echo 'alias kubectl=\"minikube kubectl --\"' >> ~/.bashrc && echo 'alias k=\"minikube kubectl --\"' >> ~/.bashrc && ./scripts/initialize.sh > ~/codespace-init.log 2>&1",
+  "postCreateCommand": "set -e && chmod +x scripts/*.sh && echo 'Installing kustomize...' && KUSTOMIZE_VERSION=v5.1.1 && curl -sLO https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F${KUSTOMIZE_VERSION}/kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && tar -xzf kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz && sudo install -o root -g root -m 0755 kustomize /usr/local/bin/kustomize && rm kustomize_${KUSTOMIZE_VERSION}_linux_amd64.tar.gz kustomize && echo 'Setting up kubectl aliases...' && echo 'alias kubectl=\"minikube kubectl --\"' >> ~/.bashrc && echo 'alias k=\"minikube kubectl --\"' >> ~/.bashrc && ./scripts/initialize.sh > ~/codespace-init.log 2>&1",
   "postAttachCommand": "./scripts/welcome.sh",
   "customizations": {
     "vscode": {

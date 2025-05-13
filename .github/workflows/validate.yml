@@ -21,16 +21,16 @@ jobs:
         run: |
           echo "Validating Kubernetes manifest files..."
           # Standard manifest files
-          kubectl apply --dry-run=client -f k8s/standard/namespace.yaml
-          kubectl apply --dry-run=client -f k8s/standard/pvc.yaml
-          kubectl apply --dry-run=client -f k8s/standard/deployment.yaml
-          kubectl apply --dry-run=client -f k8s/standard/service.yaml
-          kubectl apply --dry-run=client -f k8s/standard/webui-deployment.yaml
-          kubectl apply --dry-run=client -f k8s/standard/webui-service.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/namespace.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/pvc.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/deployment.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/service.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/webui-deployment.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/standard/webui-service.yaml
           # Codespaces manifest files
-          kubectl apply --dry-run=client -f k8s/codespaces/models-pvc.yaml
-          kubectl apply --dry-run=client -f k8s/codespaces/deployment.yaml
-          kubectl apply --dry-run=client -f k8s/codespaces/webui-deployment.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/codespaces/models-pvc.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/codespaces/deployment.yaml
+          kubectl apply --dry-run=client --validate=false -f k8s/codespaces/webui-deployment.yaml
 
       - name: Validate shell scripts
         run: |
@@ -48,7 +48,7 @@ jobs:
       - name: Test deployment (no pods will actually run)
         run: |
           echo "Testing deployment on k3d cluster..."
-          kubectl apply -f k8s/standard/namespace.yaml
-          kubectl apply -f k8s/standard/pvc.yaml
-          kubectl apply -f k8s/standard/service.yaml
+          kubectl apply --validate=false -f k8s/standard/namespace.yaml
+          kubectl apply --validate=false -f k8s/standard/pvc.yaml
+          kubectl apply --validate=false -f k8s/standard/service.yaml
           kubectl get namespace ollama

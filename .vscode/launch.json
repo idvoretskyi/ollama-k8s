@@ -12,7 +12,7 @@
       "name": "Deploy Ollama (Codespaces)",
       "type": "node-terminal",
       "request": "launch",
-      "command": "./codespaces-start.sh",
+      "command": "./scripts/codespaces-start.sh",
       "cwd": "${workspaceFolder}"
     },
     {

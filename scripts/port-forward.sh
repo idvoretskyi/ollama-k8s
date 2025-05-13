@@ -103,7 +103,8 @@ start_port_forwarding() {
             port_check=true
           fi
         else
-          # Fallback to kill check if nothing else works
+          # Fallback: Assume the port is accessible if the port-forwarding process is running.
+          # This is to prevent the script from failing in environments where no port-checking tools are available.
           port_check=true
         fi
         

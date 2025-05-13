@@ -19,7 +19,7 @@
       "name": "Deploy Ollama (Standard)",
       "type": "node-terminal",
       "request": "launch",
-      "command": "./start.sh",
+      "command": "./scripts/start.sh",
       "cwd": "${workspaceFolder}"
     },
     {

@@ -12,7 +12,7 @@ Your services are available at:
 
 1. Visit the WebUI at http://172.18.0.8:8080
 2. When prompted for the API endpoint, enter: `http://ollama:11434`
-3. Pull a model using: `./scripts/pull-model.sh llama2` (or any other model)
+3. Pull a model using: `./scripts/pull-model.sh llama3` (or another recommended model)
 4. Start chatting with your model!
 
 ## 3. Quick Start

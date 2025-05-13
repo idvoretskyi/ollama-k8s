@@ -16,7 +16,7 @@ You can interact with the Ollama API directly:
 ```bash
 # Generate a response
 curl -X POST http://<OLLAMA-EXTERNAL-IP>:11434/api/generate -d '{
-  "model": "llama2",
+  "model": "llama3",
   "prompt": "Write a haiku about Kubernetes"
 }'
 
@@ -42,7 +42,7 @@ Performance will vary depending on your hardware:
 - The Ollama image is quite large and may take time to download initially
 
 ### Model runs out of memory
-- Use a smaller model (llama2 instead of llama2-13b)
+- Use a smaller model (phi3-mini instead of llama3)
 - Increase the memory limit in the deployment.yaml file
 - Consider enabling swap space if your system supports it
 

@@ -72,7 +72,7 @@ list_models() {
     echo "$models" | grep -o '"name":"[^"]*' | cut -d'"' -f4
   else
     echo -e "${YELLOW}No models found. Try pulling a model first:${NC}"
-    echo "$BASE_DIR/scripts/pull-model.sh phi2"
+    echo "$BASE_DIR/scripts/pull-model.sh phi3-mini"
   fi
   
   return 0

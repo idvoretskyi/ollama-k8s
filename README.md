@@ -8,6 +8,8 @@ This repository contains Kubernetes manifests to deploy Ollama and Open WebUI on
 
 Try it online instantly with no local setup! [See Codespaces instructions](docs/CODESPACES.md)
 
+📋 **Recent Improvements:** Check out our [project improvements summary](docs/IMPROVEMENTS.md) for details on recent enhancements.
+
 ## Directory Structure
 
 This project has been organized into a tree-based layout for improved maintainability:
@@ -34,9 +36,9 @@ This project has been organized into a tree-based layout for improved maintainab
 
 ## Hardware Recommendations
 
-- For small models (Llama2-7B, Mistral-7B): At least 8GB RAM
-- For medium models (CodeLlama-13B, etc.): At least 16GB RAM
-- For larger models (Llama2-70B, etc.): 24GB+ RAM (may require GPU)
+- For small models (Llama3-8B, Mistral-7B, Phi3-mini): At least 8GB RAM
+- For medium models (CodeLlama-7B, etc.): At least 16GB RAM
+- For larger models (Llama3-70B, etc.): 24GB+ RAM (may require GPU)
 
 ## Quick Setup
 
@@ -128,7 +130,7 @@ For detailed usage instructions, examples, and performance expectations, see the
 Quick example API call:
 ```
 curl -X POST http://<OLLAMA-EXTERNAL-IP>:11434/api/generate -d '{
-  "model": "llama2",
+  "model": "llama3",
   "prompt": "Why is the sky blue?"
 }'
 ```
@@ -140,7 +142,7 @@ curl -X POST http://<OLLAMA-EXTERNAL-IP>:11434/api/generate -d '{
 We've included a helper script to make pulling models easier:
 
 ```bash
-./scripts/pull-model.sh llama2
+./scripts/pull-model.sh llama3
 ```
 
 You can replace `llama2` with any model available in the [Ollama Library](https://ollama.ai/library).
@@ -149,20 +151,18 @@ You can replace `llama2` with any model available in the [Ollama Library](https:
 
 Alternatively, you can pull a model by executing directly into the pod:
 ```bash
-kubectl exec -it -n ollama $(kubectl get pods -n ollama -l app=ollama -o jsonpath='{.items[0].metadata.name}') -- ollama pull llama2
+kubectl exec -it -n ollama $(kubectl get pods -n ollama -l app=ollama -o jsonpath='{.items[0].metadata.name}') -- ollama pull llama3
 ```
 
 ## Available Models
 
-Here are some popular models you can try:
+Here are some recommended models that work well with 8GB RAM:
 
-- **llama2**: The Meta Llama 2 model (7B parameters)
+- **llama3**: The latest Meta Llama 3 model (8B parameters)
 - **mistral**: Mistral 7B model
-- **mixtral**: Mixtral 8x7B (Multi-expert model)
-- **phi2**: Microsoft's Phi-2 model (small but capable)
-- **llama2-uncensored**: Less restricted version of Llama 2
-- **codellama**: Specialized for code generation
-- **stablelm-zephyr**: Lightweight and efficient model
+- **phi3-mini**: Microsoft's Phi-3 mini model (3.8B parameters)
+- **phi3**: Microsoft's Phi-3 small model (7B parameters)
+- **codellama:7b**: Specialized for code generation (7B parameters)
 
 For more information on available models, visit the [Ollama Library](https://ollama.ai/library).
 

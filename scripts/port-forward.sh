@@ -66,15 +66,7 @@ start_port_forwarding() {
   local pid=0
   
   # Check for existing connections on the port
-  if command -v nc &> /dev/null; then
-    if nc -z localhost $local_port 2>/dev/null; then
-      echo -e "${YELLOW}Port $local_port is already in use. Attempting to use it anyway...${NC}"
-    fi
-  elif command -v lsof &> /dev/null; then
-    if lsof -i:$local_port &>/dev/null; then
-      echo -e "${YELLOW}Port $local_port is already in use. Attempting to use it anyway...${NC}"
-    fi
-  fi
+  check_port_in_use $local_port
   
   while [ $attempt -le $max_attempts ]; do
     echo -e "${YELLOW}Starting port forwarding for $service on localhost:$local_port (Attempt $attempt/$max_attempts)...${NC}"

@@ -5,7 +5,7 @@
 
 if [ -z "$1" ]; then
   echo "Usage: ./pull-model.sh <model-name>"
-  echo "Example: ./pull-model.sh llama2"
+  echo "Example: ./pull-model.sh llama3"
   exit 1
 fi
 

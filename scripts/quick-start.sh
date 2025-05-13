@@ -79,7 +79,7 @@ while true; do
             "$BASE_DIR/scripts/codespaces-start.sh"
             ;;
         3)
-            echo -e "\n${GREEN}Available models:${NC} llama2, llama3, mistral, phi2, gemma"
+            echo -e "\n${GREEN}Available models:${NC} llama3, mistral, phi3-mini, phi3, codellama:7b"
             read -p "Enter model name: " model_name
             if [ -n "$model_name" ]; then
                 echo -e "\n${GREEN}Pulling model $model_name...${NC}\n"

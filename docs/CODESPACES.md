@@ -60,16 +60,16 @@ The web interface will be automatically available through the Codespaces port fo
 Pull a model optimized for Codespaces:
 
 ```bash
-./scripts/pull-model.sh phi2
+./scripts/pull-model.sh phi3-mini
 ```
 
-Alternatively, use VS Code Tasks (Terminal → Run Task → Pull Phi-2 Model).
+Alternatively, use VS Code Tasks (Terminal → Run Task → Pull Phi-3 Mini Model).
 
-Recommended models for Codespaces (small footprint):
-- `phi2` (2.7B parameters) - Microsoft's small but capable model
-- `gemma:2b` (2B parameters) - Google's efficient small model
-- `tinyllama` (1.1B parameters) - Extremely lightweight
-- `neural-chat:7b` (7B parameters) - Good performance if you have enough RAM
+Recommended models for Codespaces (suitable for 8GB RAM):
+- `phi3-mini` (3.8B parameters) - Microsoft's compact but powerful model
+- `llama3` (8B parameters) - Meta's latest general purpose model 
+- `mistral:7b` (7B parameters) - Excellent all-around performance
+- `codellama:7b` (7B parameters) - Specialized for code generation
 
 Avoid larger models like llama2-70b or mixtral-8x7b as they will likely crash in standard Codespaces environments.
 
@@ -102,7 +102,8 @@ This repository includes several helpful VS Code tools:
 3. Choose from available tasks:
    - Setup Kubernetes Cluster
    - Deploy Ollama (Codespaces-optimized)
-   - Pull Phi-2 Model
+   - Pull Phi-3 Mini Model
+   - Pull Llama3 Model
    - Monitor Resources
    - Test Ollama API
    - And more!

@@ -36,9 +36,9 @@
       }
     },
     {
-      "label": "Pull Phi-2 Model",
+      "label": "Pull Phi-3 Mini Model",
       "type": "shell",
-      "command": "./scripts/pull-model.sh phi2",
+      "command": "./scripts/pull-model.sh phi3-mini",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
@@ -46,9 +46,9 @@
       }
     },
     {
-      "label": "Pull Gemma 2B Model",
+      "label": "Pull Llama3 Model",
       "type": "shell",
-      "command": "./scripts/pull-model.sh gemma:2b",
+      "command": "./scripts/pull-model.sh llama3",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",

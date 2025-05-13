@@ -5,7 +5,7 @@
       "name": "Setup Kubernetes",
       "type": "node-terminal",
       "request": "launch",
-      "command": "./codespaces-setup.sh",
+      "command": "./scripts/codespaces-setup.sh",
       "cwd": "${workspaceFolder}"
     },
     {

@@ -26,7 +26,7 @@
       "name": "Monitor Resources",
       "type": "node-terminal",
       "request": "launch",
-      "command": "./monitor.sh",
+      "command": "./scripts/monitor.sh",
       "cwd": "${workspaceFolder}"
     }
   ]

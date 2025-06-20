@@ -36,3 +36,7 @@ yarn-error.log*
 
 # Backup files
 *.bak
+
+# Claude Code files
+CLAUDE.md
+.claude/

@@ -38,7 +38,7 @@ display_menu() {
     echo -e "  ${GREEN}3) Pull a model${NC} - Download a model from Ollama repository"
     echo -e "  ${GREEN}4) Port-forward services${NC} - Access services via localhost"
     echo -e "  ${GREEN}5) Test API connectivity${NC} - Verify API is working"
-    echo -e "  ${GREEN}6) Monitor resources${NC} - View resource usage"
+    echo -e "  ${GREEN}6) View pod status${NC} - Check deployment status"
     echo -e "  ${GREEN}7) Exit${NC}"
     echo ""
     if [ "$RECOMMENDED" == "codespaces" ]; then
@@ -97,8 +97,12 @@ while true; do
             "$BASE_DIR/scripts/test-api.sh"
             ;;
         6)
-            echo -e "\n${GREEN}Launching resource monitor...${NC}\n"
-            "$BASE_DIR/scripts/monitor.sh"
+            echo -e "\n${GREEN}Checking pod status...${NC}\n"
+            kubectl get pods -n ollama -o wide
+            echo -e "\n${GREEN}Checking services...${NC}\n"
+            kubectl get svc -n ollama
+            echo -e "\n${GREEN}Resource usage:${NC}"
+            kubectl top pods -n ollama 2>/dev/null || echo "Resource metrics not available"
             ;;
         7)
             echo -e "\n${GREEN}Exiting...${NC}\n"
@@ -110,6 +114,6 @@ while true; do
     esac
     
     echo ""
-    read -p "Press Enter to continue..."
+    read -r -p "Press Enter to continue..."
     clear
 done

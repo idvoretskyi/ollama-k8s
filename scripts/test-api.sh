@@ -109,4 +109,4 @@ else
 fi
 
 echo ""
-echo -e "${BLUE}For more information, see $BASE_DIR/README.md and $BASE_DIR/docs/USAGE.md${NC}"
+echo -e "${BLUE}For more information, see $BASE_DIR/README.md${NC}"

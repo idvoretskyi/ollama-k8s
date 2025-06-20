@@ -6,18 +6,15 @@ This repository contains Kubernetes manifests to deploy Ollama and Open WebUI on
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/idvoretskyi/ollama-k8s)
 
-Try it online instantly with no local setup! [See Codespaces instructions](docs/CODESPACES.md)
+Try it online instantly with no local setup! [Open in Codespaces](https://codespaces.new/idvoretskyi/ollama-k8s)
 
-📋 **Recent Improvements:** Check out our [project improvements summary](docs/IMPROVEMENTS.md) for details on recent enhancements.
 
 ## Directory Structure
 
 This project has been organized into a tree-based layout for improved maintainability:
 
-- `docs/` - Documentation files
 - `k8s/` - Kubernetes manifests (standard and codespaces variants)
-- `scripts/` - Shell scripts for various operations
-- Previously had root `.sh` files for compatibility (now moved to scripts/)
+- `scripts/` - Shell scripts for deployment and management operations
 
 ## What's Included
 
@@ -125,7 +122,7 @@ Ollama will be available at http://<OLLAMA-EXTERNAL-IP>:11434. You can interact 
 2. The Ollama CLI (if port-forwarding)
 3. REST API calls
 
-For detailed usage instructions, examples, and performance expectations, see the [USAGE.md](docs/USAGE.md) file.
+For detailed usage instructions, see the examples below.
 
 Quick example API call:
 ```
@@ -165,6 +162,75 @@ Here are some recommended models that work well with 8GB RAM:
 - **codellama:7b**: Specialized for code generation (7B parameters)
 
 For more information on available models, visit the [Ollama Library](https://ollama.ai/library).
+
+## Usage Examples
+
+### Chat in Web UI
+
+The simplest way to interact with models is through the WebUI:
+
+1. Access the WebUI at http://localhost:8080 (if port-forwarded) or http://<WEBUI-EXTERNAL-IP>:8080
+2. When prompted, configure the API endpoint to be http://ollama:11434 (or http://localhost:11434 if accessing from outside the cluster)
+3. Select a model (you may need to pull it first using the `./scripts/pull-model.sh` script)
+4. Start chatting!
+
+### API Usage
+
+You can interact with the Ollama API directly:
+
+```bash
+# Generate a response
+curl -X POST http://<OLLAMA-EXTERNAL-IP>:11434/api/generate -d '{
+  "model": "llama3",
+  "prompt": "Write a haiku about Kubernetes"
+}'
+
+# List available models
+curl http://<OLLAMA-EXTERNAL-IP>:11434/api/tags
+```
+
+## GitHub Codespaces
+
+This repository works great with GitHub Codespaces! Here's how to get started:
+
+1. Click the Codespaces button above or [launch directly](https://codespaces.new/idvoretskyi/ollama-k8s)
+2. Run the setup script: `./scripts/codespaces-setup.sh` (if needed)
+3. Deploy with optimized settings: `./scripts/codespaces-start.sh`
+4. Pull a small model: `./scripts/pull-model.sh phi3-mini`
+5. Access the WebUI through the ports tab
+
+Recommended models for Codespaces (8GB RAM limit):
+- `phi3-mini` (3.8B parameters) - Compact but powerful
+- `llama3` (8B parameters) - Meta's latest model
+- `mistral:7b` (7B parameters) - Excellent performance
+- `codellama:7b` (7B parameters) - Code generation
+
+## Troubleshooting
+
+### Pod won't start
+- Check resources: `kubectl describe pod -n ollama`
+- The Ollama image is large and may take time to download initially
+
+### Model runs out of memory
+- Use a smaller model (phi3-mini instead of llama3)
+- Increase memory limits in deployment.yaml
+- Consider enabling swap if supported
+
+### WebUI can't connect to Ollama
+- Check both pods are running: `kubectl get pods -n ollama`
+- Verify OLLAMA_API_BASE_URL is set to "http://ollama:11434"
+- Test service discovery: `kubectl exec -it -n ollama <webui-pod> -- curl ollama:11434/api/version`
+
+### WebUI crashes with OOMKilled
+- Increase memory in webui-deployment.yaml:
+  ```yaml
+  resources:
+    requests:
+      memory: "512Mi"
+    limits:
+      memory: "1Gi"
+  ```
+- Apply changes: `kubectl apply -f k8s/standard/webui-deployment.yaml`
 
 ## Contributing
 

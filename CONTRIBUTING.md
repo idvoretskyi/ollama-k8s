@@ -50,12 +50,10 @@ We welcome contributions via pull requests! Here's how to submit one:
 
 The project is organized as follows:
 
-- `docs/` - Documentation files
 - `k8s/` - Kubernetes manifests
   - `standard/` - Standard manifests
   - `codespaces/` - Codespaces-optimized manifests
 - `scripts/` - Shell scripts for deployment and management
-- Root `.sh` files - Wrapper scripts for backward compatibility
 
 ## Development Setup
 
